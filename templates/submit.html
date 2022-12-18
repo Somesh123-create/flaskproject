@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container mt-3">
+  {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <strong>Hey {{name}}-</strong> {{message}}.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+
+
+  {% if form.name.errors %}
+      <ul class="errors">
+      {% for error in form.name.errors %}
+          <li>{{ error }}</li>
+      {% endfor %}
+      </ul>
+  {% endif %}
+
+
+
+  {% if name %}
+
+    <div class="card mb-3 profile-card">
+      <img src="{{ url_for('static', filename='images/winter-forest.jpg') }}" class="card-img-top" alt="{{name}}">
+      <div class="card-body">
+        <h5 class="card-title">{{name}}</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+
+      <div class="" id="demo">
+
+      </div>
+
+
+
+
+  {% else %}
+    <h1>What's your name?</h1>
+    <form method="POST">
+        {{ form.csrf_token }}
+        {{ form.name.label(class="form-label") }}
+        {{ form.name(class="form-control") }}
+        </br>
+        <button class="btn btn-secondary" type="submit">Submit</button>
+    </form>
+
+  {% endif %}
+</div>
+
+
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+
+
+{% endblock %}

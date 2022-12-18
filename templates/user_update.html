@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<div class="container mt-3">
+  {% if name_update %}
+    <h1>User name:  {{name_update.name}}</h1>
+
+  {% endif %}
+
+
+  <form method="POST">
+      {{ form.csrf_token }}
+      {{ form.name.label(class="form-label") }}
+      {{ form.name(class="form-control", value=name_update.name) }}
+      {{ form.email.label(class="form-label") }}
+      {{ form.email(class="form-control", value=name_update.email) }}
+      {{ form.favorite_color.label(class="form-label") }}
+      {{ form.favorite_color(class="form-control", value=name_update.favorite_color) }}
+
+      {{ form.password_hash.label(class="form-label") }}
+      {{ form.password_hash(class="form-control") }}
+      {{ form.password_hash2.label(class="form-label") }}
+      {{ form.password_hash2(class="form-control") }}
+
+    </br>
+    <button class="btn btn-secondary" type="submit">Submit</button>
+    <a href="{{ url_for('user_delete', id=name_update.id) }}" class="btn btn-danger" type="submit">Remove</a>
+  </form>
+
+</div>
+
+
+{% endblock %}
